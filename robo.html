@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Detail</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-outline" id="cursor-outline"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">ポートフォリオ</a>
+        <nav class="nav-desktop">
+          <a href="index.html" class="nav-link" data-i18n="home">Home</a>
+          <a href="index.html#skills" class="nav-link" data-i18n="about">About</a>
+          <a href="index.html#skills" class="nav-link" data-i18n="skills">Skills</a>
+          <a href="index.html#projects" class="nav-link" data-i18n="projects">Projects</a>
+          <a href="index.html#contact" class="nav-link" data-i18n="contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <button class="language-toggle" id="language-toggle">
+            <i class="fas fa-globe"></i>
+          </button>
+          <button class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-content">
+      <a href="index.html" class="mobile-nav-link" data-i18n="home">Home</a>
+      <a href="index.html#skills" class="mobile-nav-link" data-i18n="about">About</a>
+      <a href="index.html#skills" class="mobile-nav-link" data-i18n="skills">Skills</a>
+      <a href="index.html#projects" class="mobile-nav-link" data-i18n="projects">Projects</a>
+      <a href="index.html#contact" class="mobile-nav-link" data-i18n="contact">Contact</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <section class="project-detail">
+      <div class="paper-texture"></div>
+      <div class="container">
+        <a href="index.html#projects" class="back-link">
+          <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+
+        <h1 id="project-title" class="project-detail-title">A Robot Discovers an Ancient Cave
+        </h1>
+        
+        <div class="project-meta">
+          <span id="project-category" class="project-detail-category">Category</span>
+          <span id="project-date" class="project-detail-date"><i class="far fa-calendar"></i> Date</span>
+        </div>
+
+        <!-- Main Image Container -->
+        <div class="project-main-image">
+          <img id="main-project-image" src="/img/Screenshot_20250512_133024_Chrome.jpg" alt="Project Image">
+        </div>
+
+        <!-- Image Gallery -->
+        <div class="project-gallery">
+          <div class="gallery-thumbnails" id="gallery-thumbnails">
+            <img src="/img/Screenshot_20250512_133024_Chrome.jpg" alt="">
+
+
+            <!-- Thumbnails will be added dynamically -->
+          </div>
+        </div>
+
+        <!-- Project Description -->
+        <div class="project-description-container">
+          <h2>Project Description</h2>
+          <div id="project-description" class="project-detail-description">
+          <p>A narrative-driven animation that follows a curious robot exploring a mysterious ancient cave. This project blends imaginative storytelling with digital art, showcasing smooth character animations and atmospheric environmental effects that bring the adventure to life.</p>
+          </div>
+
+        </div>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <a href="/" class="footer-logo">ポートフォリオ</a>
+          <p class="footer-description">
+            A creative portfolio showcasing my skills in software development, animation, web development, editing,
+            and graphic design with a Japanese-inspired aesthetic.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#skills">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h3 class="footer-heading">Contact</h3>
+          <ul>
+            <li>Tokyo, Japan</li>
+            <li><a href="mailto:info@example.com">info@example.com</a></li>
+            <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© <span id="current-year"></span> ポートフォリオ. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Music Player -->
+  <div class="music-player" id="music-player">
+    <button class="music-player-toggle" id="music-player-toggle">
+      <i class="fas fa-music"></i>
+    </button>
+    <div class="music-player-expanded" id="music-player-expanded">
+      <div class="music-player-header">
+        <div class="music-player-title">Now Playing</div>
+        <button class="music-player-close" id="music-player-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="music-player-info">
+        <div class="music-player-artwork">
+          <i class="fas fa-music"></i>
+        </div>
+        <div class="music-player-details">
+          <div class="music-player-track">Sakura Dreams</div>
+          <div class="music-player-artist">Anime Beats</div>
+        </div>
+      </div>
+      <div class="music-player-controls">
+        <div class="music-player-progress">
+          <div class="music-player-progress-bar" id="music-progress-bar">
+            <div class="music-player-progress-current" id="music-progress-current"></div>
+          </div>
+          <div class="music-player-times">
+            <span id="music-current-time">0:00</span>
+            <span id="music-duration">0:00</span>
+          </div>
+        </div>
+        <div class="music-player-buttons">
+          <button id="music-volume-btn"><i class="fas fa-volume-up"></i></button>
+          <div class="music-volume-slider">
+            <input type="range" id="music-volume" min="0" max="1" step="0.01" value="0.7">
+          </div>
+          <button id="music-prev-btn"><i class="fas fa-step-backward"></i></button>
+          <button id="music-play-btn" class="music-play-btn">
+            <i class="fas fa-play"></i>
+            <i class="fas fa-pause"></i>
+          </button>
+          <button id="music-next-btn"><i class="fas fa-step-forward"></i></button>
+        </div>
+      </div>
+    </div>
+    <audio id="audio-player" preload="metadata"></audio>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="project-detail.js"></script>
+</body>
+</html>
