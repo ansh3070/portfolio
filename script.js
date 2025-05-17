@@ -432,17 +432,17 @@ const songs = [
   {
     title: "sparkel",
     artist: "radwimps",
-    src: "/vid/Sparkle(RADWIMPS).mp3", // Replace with actual audio file
+    src: "vid/Sparkle(RADWIMPS).mp3", // Replace with actual audio file
   },
   {
     title: "tada koe hitotsu",
     artist: "rokudenashi",
-    src: "/vid/y2meta.com - ロクデナシ -  ただ声一つ「Rokudenashi-Tada koe hitotsu」_Just one voice (Lyrics) (320 kbps).mp3", // Replace with actual audio file
+    src: "vid/y2meta.com - ロクデナシ -  ただ声一つ「Rokudenashi-Tada koe hitotsu」_Just one voice (Lyrics) (320 kbps).mp3", // Replace with actual audio file
   },
   {
     title: "wasureji",
     artist: "mirai kodai",
-    src: "/vid/wasureji-no-kotonoha-bez-wokalu.mp3", // Replace with actual audio file
+    src: "vid/wasureji-no-kotonoha-bez-wokalu.mp3", // Replace with actual audio file
   },
 ]
 
