@@ -348,22 +348,101 @@ if (contactForm) {
   })
 }
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateSongInfo();
+  audioPlayer.volume = 0.5;
+
+  // Try autoplay on page load (will likely be blocked by browser)
+  audioPlayer.play().catch((error) => {
+    console.warn("Autoplay blocked, waiting for user interaction...");
+
+    // Wait for the first interaction
+    const enableAutoplay = () => {
+      audioPlayer.play().then(() => {
+        console.log("Autoplay started after interaction");
+      }).catch((error) => {
+        console.error("Still failed to play:", error);
+      });
+
+      // Remove listeners after first attempt
+      document.removeEventListener("click", enableAutoplay);
+      document.removeEventListener("touchstart", enableAutoplay);
+      document.removeEventListener("keydown", enableAutoplay);
+    };
+
+    document.addEventListener("click", enableAutoplay);
+    document.addEventListener("touchstart", enableAutoplay);
+    document.addEventListener("keydown", enableAutoplay);
+  });
+});
+
+
+
+
+
+window.addEventListener("beforeunload", () => {
+  const musicState = {
+    index: currentSongIndex,
+    time: audioPlayer.currentTime,
+    isPlaying: isPlaying,
+    volume: audioPlayer.volume,
+  };
+  localStorage.setItem("musicState", JSON.stringify(musicState));
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedState = JSON.parse(localStorage.getItem("musicState"));
+
+  if (savedState) {
+    currentSongIndex = savedState.index || 0;
+    updateSongInfo();
+
+    audioPlayer.currentTime = savedState.time || 0;
+    audioPlayer.volume = savedState.volume ?? 0.5;
+
+    if (savedState.isPlaying) {
+      audioPlayer.play().catch((error) => {
+        console.warn("Autoplay blocked, waiting for interaction...");
+
+        const enableAutoplay = () => {
+          audioPlayer.play();
+          document.removeEventListener("click", enableAutoplay);
+          document.removeEventListener("touchstart", enableAutoplay);
+        };
+
+        document.addEventListener("click", enableAutoplay);
+        document.addEventListener("touchstart", enableAutoplay);
+      });
+    }
+  } else {
+    updateSongInfo(); // If nothing saved, load first song
+  }
+});
+
+
+
+
+
+
 // Music Player
 const songs = [
   {
-    title: "Sakura Dreams",
-    artist: "Anime Beats",
-    src: "https://example.com/sakura-dreams.mp3", // Replace with actual audio file
+    title: "sparkel",
+    artist: "radwimps",
+    src: "/vid/Sparkle(RADWIMPS).mp3", // Replace with actual audio file
   },
   {
-    title: "Tokyo Nights",
-    artist: "J-Pop Vibes",
-    src: "https://example.com/tokyo-nights.mp3", // Replace with actual audio file
+    title: "tada koe hitotsu",
+    artist: "rokudenashi",
+    src: "/vid/y2meta.com - ロクデナシ -  ただ声一つ「Rokudenashi-Tada koe hitotsu」_Just one voice (Lyrics) (320 kbps).mp3", // Replace with actual audio file
   },
   {
-    title: "Cherry Blossom",
-    artist: "Anime Soundtrack",
-    src: "https://example.com/cherry-blossom.mp3", // Replace with actual audio file
+    title: "wasureji",
+    artist: "mirai kodai",
+    src: "/vid/wasureji-no-kotonoha-bez-wokalu.mp3", // Replace with actual audio file
   },
 ]
 
@@ -534,3 +613,41 @@ const animateOnScroll = () => {
 
 window.addEventListener("scroll", animateOnScroll)
 animateOnScroll() // Run once on load
+
+
+
+
+
+
+// If you're using the JavaScript version (script.js)
+document.addEventListener("DOMContentLoaded", () => {
+  // ... existing code ...
+  
+  // Add this to make it autoplay when the page loads
+  window.addEventListener("load", () => {
+    const audioPlayer = document.getElementById("audio-player");
+    if (audioPlayer) {
+      audioPlayer.volume = 0.5; // Start at 50% volume
+      audioPlayer.play().catch(error => {
+        console.error("Autoplay failed:", error);
+        // Most browsers require user interaction before autoplay
+        // Show a play button or notification to the user
+      });
+    }
+  });
+});
+
+// In script.js
+audioPlayer.addEventListener("ended", () => {
+  if (currentSongIndex < songs.length - 1) {
+    currentSongIndex++;
+  } else {
+    currentSongIndex = 0; // Loop back to the first song
+  }
+  updateSongInfo();
+  audioPlayer.play().catch(error => {
+    console.error("Autoplay of next song failed:", error);
+  });
+});
+
+
