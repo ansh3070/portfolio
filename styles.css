@@ -132,29 +132,7 @@
     padding: 0 1rem;
   }
   
-  /* Custom Cursor */
-  .cursor-dot,
-  .cursor-outline {
-    pointer-events: none;
-    position: fixed;
-    z-index: 9999;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s;
-  }
-  
-  .cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--primary);
-  }
-  
-  .cursor-outline {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--primary);
-    transition: width 0.3s, height 0.3s, transform 0.3s;
-  }
+
   
   /* Loading Screen */
   .loading-screen {
