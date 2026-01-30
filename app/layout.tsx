@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'My Portfolio',
-  description: 'Welcome to my portfolio',
+  title: 'Portfolio-ANSH RAJPUT',
+  description: 'Showcasing My Digital Journey',
+  viewport: 'width=device-width, initial-scale=1.0',
 }
 
 export default function RootLayout({
@@ -13,6 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+      </head>
       <body>{children}</body>
     </html>
   )
