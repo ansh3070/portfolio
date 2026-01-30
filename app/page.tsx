@@ -1,74 +1,43 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
-  const loadingScreenRef = useRef<HTMLDivElement>(null)
-  const cursorDotRef = useRef<HTMLDivElement>(null)
-  const cursorOutlineRef = useRef<HTMLDivElement>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Load the script
-    const script = document.createElement('script')
-    script.src = '/script.js'
-    script.async = true
-    document.body.appendChild(script)
+    // Hide loading screen after content loads
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
 
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script)
-      }
-    }
+    return () => clearTimeout(timer)
   }, [])
 
   return (
     <>
-      <div className="cursor-dot" id="cursor-dot" ref={cursorDotRef}></div>
-      <div className="cursor-outline" id="cursor-outline" ref={cursorOutlineRef}></div>
-
-      {/* Loading Screen */}
-      <div className="loading-screen" id="loading-screen" ref={loadingScreenRef}>
-        <div className="loading-content">
-          <div className="loading-icon">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <path d="M50,10 C70,25 75,40 50,50 C25,40 30,25 50,10 Z" fill="none" stroke="url(#gradient)" strokeWidth="4" />
-              <path d="M50,50 C75,60 70,75 50,90 C30,75 25,60 50,50 Z" fill="none" stroke="url(#gradient)" strokeWidth="4" />
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#ec4899" />
-                  <stop offset="100%" stopColor="#8b5cf6" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <h2 className="loading-text">Loading...</h2>
-          <div className="loading-bar">
-            <div className="loading-progress"></div>
-          </div>
-        </div>
-      </div>
+      {isLoading && <LoadingScreen />}
+      
+      <div className="cursor-dot" id="cursor-dot"></div>
+      <div className="cursor-outline" id="cursor-outline"></div>
 
       {/* Header */}
       <header className="header">
         <div className="container">
           <div className="header-content">
-            <a href="/" className="logo">ポートフォリオ</a>
+            <div className="logo">Portfolio</div>
             <nav className="nav-desktop">
-              <a href="#" className="nav-link" data-i18n="home">Home</a>
-              <a href="#skills" className="nav-link" data-i18n="about">About</a>
-              <a href="#skills" className="nav-link" data-i18n="skills">Skills</a>
-              <a href="#projects" className="nav-link" data-i18n="projects">Projects</a>
-              <a href="#contact" className="nav-link" data-i18n="contact">Contact</a>
+              <a href="#home" className="nav-link">Home</a>
+              <a href="#about" className="nav-link">About</a>
+              <a href="#skills" className="nav-link">Skills</a>
+              <a href="#projects" className="nav-link">Projects</a>
+              <a href="#contact" className="nav-link">Contact</a>
             </nav>
             <div className="header-actions">
-              <button className="language-toggle" id="language-toggle">
-                <i className="fas fa-globe"></i>
-              </button>
-              <button className="theme-toggle" id="theme-toggle">
-                <i className="fas fa-sun"></i>
+              <button className="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                 <i className="fas fa-moon"></i>
               </button>
-              <button className="menu-toggle" id="menu-toggle">
+              <button className="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
                 <i className="fas fa-bars"></i>
               </button>
             </div>
@@ -78,41 +47,49 @@ export default function Home() {
 
       {/* Mobile Menu */}
       <div className="mobile-menu" id="mobile-menu">
-        <div className="mobile-menu-content">
-          <a href="#" className="mobile-nav-link" data-i18n="home">Home</a>
-          <a href="#skills" className="mobile-nav-link" data-i18n="about">About</a>
-          <a href="#skills" className="mobile-nav-link" data-i18n="skills">Skills</a>
-          <a href="#projects" className="mobile-nav-link" data-i18n="projects">Projects</a>
-          <a href="#contact" className="mobile-nav-link" data-i18n="contact">Contact</a>
-        </div>
+        <a href="#home" className="mobile-nav-link">Home</a>
+        <a href="#about" className="mobile-nav-link">About</a>
+        <a href="#skills" className="mobile-nav-link">Skills</a>
+        <a href="#projects" className="mobile-nav-link">Projects</a>
+        <a href="#contact" className="mobile-nav-link">Contact</a>
       </div>
 
-      {/* Main Content */}
       <main>
         {/* Hero Section */}
-        <section className="hero">
-          <canvas id="sakura-canvas" className="sakura-canvas"></canvas>
-          <div className="mt-fuji-background">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1000162399.jpg-ppnSbpNDHlAMNsgmcszEZguR79swQT.jpeg" alt="Mount Fuji with cherry blossoms" />
-            <div className="overlay"></div>
+        <section className="hero" id="home">
+          <div className="hero-content">
+            <h1 className="hero-title">ANSH RAJPUT</h1>
+            <p className="hero-subtitle">Creative Developer & Designer</p>
+            <p className="hero-description">Building beautiful digital experiences through code, animation, and design</p>
+            <div className="hero-buttons">
+              <a href="#projects" className="btn btn-primary">View My Work</a>
+              <a href="#contact" className="btn btn-outline">Get in Touch</a>
+            </div>
           </div>
+        </section>
+
+        {/* About Section */}
+        <section className="about" id="about">
           <div className="container">
-            <div className="hero-content">
-              <div className="hero-text">
-                <h1 className="hero-title"><br/><br/><br/>ポートフォリオ</h1>
-                <p className="hero-subtitle">Showcasing My Digital Journey</p>
-                <div className="hero-buttons">
-                  <a href="#projects" className="btn btn-primary" data-i18n="viewProjects">
-                    View Projects <i className="fas fa-arrow-right"></i>
-                  </a>
-                  <a href="#contact" className="btn btn-outline" data-i18n="contactMe">
-                    Contact Me
-                  </a>
-                </div>
+            <h2 className="section-title">About Me</h2>
+            <div className="about-content">
+              <div className="about-text">
+                <p>I'm a passionate developer and designer focused on creating meaningful digital experiences. With expertise in web development, animation, and graphic design, I bring ideas to life with precision and creativity.</p>
+                <p>I believe in combining technical excellence with beautiful design to create solutions that not only work well but feel great to use.</p>
               </div>
-              
-              <div className="tenor-gif-embed" data-postid="21223608" data-share-method="host" data-aspect-ratio="1" data-width="30%" className="hero-image">
-                <a href="https://tenor.com/view/welcome-gif-21223608">Welcome GIF</a>from <a href="https://tenor.com/search/welcome-gifs">Welcome GIFs</a>
+              <div className="about-stats">
+                <div className="stat">
+                  <h3>50+</h3>
+                  <p>Projects Completed</p>
+                </div>
+                <div className="stat">
+                  <h3>100%</h3>
+                  <p>Client Satisfaction</p>
+                </div>
+                <div className="stat">
+                  <h3>5+</h3>
+                  <p>Years Experience</p>
+                </div>
               </div>
             </div>
           </div>
@@ -120,72 +97,94 @@ export default function Home() {
 
         {/* Skills Section */}
         <section className="skills" id="skills">
-          <div className="paper-texture"></div>
           <div className="container">
-            <h2 className="section-title" data-i18n="skills">
-              My Skills
-              <span className="title-underline"></span>
-            </h2>
+            <h2 className="section-title">My Skills</h2>
             <div className="skills-grid">
-              <SkillCard color="pink" icon="fa-code" title="Software Development" description="I develop practical and efficient software solutions with a strong focus on logic, user needs, and clean code structure. My work often involves building systems that solve real-world problems through thoughtful design and modern programming techniques." />
-              <SkillCard color="purple" icon="fa-film" title="Animation" description="I create meaningful animations that combine storytelling with technical skill. Each animation reflects careful attention to movement, timing, and emotion—skills that help me express ideas visually and connect with audiences." />
-              <SkillCard color="indigo" icon="fa-laptop" title="Web Development" description="I design and build responsive, user-friendly websites using modern technologies. My goal is to create experiences that are visually appealing and technically sound, with a focus on accessibility, performance, and structure." />
-              <SkillCard color="blue" icon="fa-cut" title="Editing" description="I specialize in editing videos and media content with precision and creativity. Whether for events, presentations, pramotion, advertisment or storytelling, I ensure every frame supports the message clearly and professionally." />
-              <SkillCard color="cyan" icon="fa-paint-brush" title="Graphic Design" description="I design visuals for events, campaigns, and communication needs. My work combines creativity with purpose—delivering messages in a way that is both attractive and effective, whether for school functions, promotions, or digital platforms." />
+              <SkillCard icon="fa-code" title="Web Development" description="React, Next.js, TypeScript, Tailwind CSS" />
+              <SkillCard icon="fa-palette" title="UI/UX Design" description="Figma, Adobe XD, Design Systems" />
+              <SkillCard icon="fa-film" title="Animation" description="Three.js, Framer Motion, WebGL" />
+              <SkillCard icon="fa-pencil-ruler" title="Graphic Design" description="Branding, Illustrations, Motion Graphics" />
+              <SkillCard icon="fa-server" title="Backend" description="Node.js, Express, MongoDB, PostgreSQL" />
+              <SkillCard icon="fa-video" title="Video Editing" description="Premiere Pro, After Effects, DaVinci" />
             </div>
           </div>
         </section>
 
         {/* Projects Section */}
         <section className="projects" id="projects">
-          <div className="paper-texture light"></div>
           <div className="container">
-            <h2 className="section-title" data-i18n="featuredProjects">
-              Featured Projects
-              <span className="title-underline"></span>
-            </h2>
-            
-            <div className="projects-tabs">
-              <div className="tabs-list">
-                <button className="tab-button active" data-category="all">All</button>
-                <button className="tab-button" data-category="software">Software</button>
-                <button className="tab-button" data-category="animation">Animation</button>
-                <button className="tab-button" data-category="web">Web</button>
-                <button className="tab-button" data-category="design">Editing</button>
-              </div>
-
-              <div className="projects-grid">
-                <ProjectCard category="web" image="/img/w2 c.jpg" title="farewell data share" description="A dedicated website to share and manage farewell event data smoothly and efficiently." link="fare.html" />
-                <ProjectCard category="web" image="/img/w52 c.jpg" title="movie night together" description="An interactive website designed to organize and share movie nights with friends seamlessly" link="mo.html" />
-                <ProjectCard category="web" image="/img/w6 c.jpg" title="home together" description="A fully responsive wheer couples can create there goals and get poin on completing it, use it to gift things." link="ho.html" />
-                <ProjectCard category="web" image="/img/w11 c.png" title="cafe + reservation" description="A dynamic web solution for managing café reservations with a clean and intuitive interface." link="ca1.html" />
-                <ProjectCard category="web" image="/img/s11.jpg" title="cafe frontend" description="cafe frontend design." link="ca2.html" />
-                <ProjectCard category="web" image="/img/g111.jpg" title="arcade game shop + cafe" description="UI design for a Japanese-themed mobile arcade game shop, focusing on easy navigation and appealing aesthetics." link="ac.html" />
-                <ProjectCard category="animation" image="/img/A1.png" title="car garage" description="A detailed animation showcasing a car garage environment with smooth visual storytelling." link="car.html" />
-                <ProjectCard category="animation" image="/img/a2.jpg" title="cyber punk style landscape" description="An atmospheric cyberpunk-style animated landscape with vibrant colors and futuristic elements." link="cyb.html" />
-                <ProjectCard category="animation" image="/img/a33.jpg" title="beach landscape" description="A relaxing beach environment animation capturing the essence of a peaceful coastal scene." link="beach.html" />
-                <ProjectCard category="animation" image="/img/a22.jpg" title="abandoned city 3d enironment" description="A detailed 3D animated scene of an abandoned city, highlighting textures and mood." link="aban.html" />
-                <ProjectCard category="animation" image="/img/ganesh ji.jpg" title="a robot discover an anicient cave" description="An imaginative animation telling the story of a robot exploring a mysterious ancient cave." link="robo.html" />
-                <ProjectCard category="animation" image="/img/ram.jpg" title="ram" description="Animation project." link="ram.html" />
-              </div>
+            <h2 className="section-title">Featured Projects</h2>
+            <div className="projects-grid">
+              <ProjectCard
+                title="Farewell Data Share"
+                description="Web platform for sharing and managing farewell event data"
+                category="Web"
+                image="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
+              />
+              <ProjectCard
+                title="Movie Night Together"
+                description="Interactive platform to organize and share movie nights"
+                category="Web"
+                image="https://images.unsplash.com/photo-1533928298208-27ff66555d0d?w=400&h=300&fit=crop"
+              />
+              <ProjectCard
+                title="Home Together"
+                description="Couples goal tracking and achievement app with rewards"
+                category="Web"
+                image="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop"
+              />
+              <ProjectCard
+                title="Cafe + Reservation"
+                description="Dynamic café reservation management system"
+                category="Web"
+                image="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=300&fit=crop"
+              />
+              <ProjectCard
+                title="Arcade Game Shop UI"
+                description="Japanese-themed arcade and café UI design"
+                category="Design"
+                image="https://images.unsplash.com/photo-1538481143235-c8f86291821f?w=400&h=300&fit=crop"
+              />
+              <ProjectCard
+                title="3D Environments"
+                description="Collection of immersive 3D animated scenes"
+                category="Animation"
+                image="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop"
+              />
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
         <section className="contact" id="contact">
-          <div className="paper-texture"></div>
           <div className="container">
-            <h2 className="section-title" data-i18n="getInTouch">
-              Get In Touch
-              <span className="title-underline"></span>
-            </h2>
-            <div className="contact-content">
-              <div className="contact-character">
-                <img id="character-image" src="https://via.placeholder.com/200" alt="Character" />
-                <p id="character-text">Hello! Please fill out the form to contact me.</p>
+            <h2 className="section-title">Get In Touch</h2>
+            <div className="contact-wrapper">
+              <div className="contact-info">
+                <h3>Let's connect</h3>
+                <p>I'm always interested in hearing about new projects and opportunities.</p>
+                <div className="contact-details">
+                  <div className="contact-item">
+                    <i className="fas fa-envelope"></i>
+                    <p>your.email@example.com</p>
+                  </div>
+                  <div className="contact-item">
+                    <i className="fas fa-phone"></i>
+                    <p>+1 (555) 123-4567</p>
+                  </div>
+                  <div className="contact-item">
+                    <i className="fas fa-map-marker-alt"></i>
+                    <p>Your Location</p>
+                  </div>
+                </div>
+                <div className="social-links">
+                  <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
+                  <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
+                  <a href="#" aria-label="GitHub"><i className="fab fa-github"></i></a>
+                  <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+                </div>
               </div>
-              <form id="contact-form" className="contact-form">
+              <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
                   <input type="text" id="name" name="name" required />
@@ -207,100 +206,149 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Music Player */}
-        <div className="music-player-compact" id="music-player-toggle">
-          <button className="music-player-button">
-            <i className="fas fa-music"></i>
-          </button>
-        </div>
-
-        <div className="music-player-expanded" id="music-player-expanded">
-          <div className="music-player-header">
-            <h3 className="music-player-track">Song</h3>
-            <p className="music-player-artist">Artist</p>
-            <button id="music-player-close">
-              <i className="fas fa-times"></i>
-            </button>
-          </div>
-          <div className="music-player-controls">
-            <button id="music-prev-btn"><i className="fas fa-step-backward"></i></button>
-            <button id="music-play-btn"><i className="fas fa-play"></i></button>
-            <button id="music-next-btn"><i className="fas fa-step-forward"></i></button>
-          </div>
-          <div className="music-player-progress">
-            <div id="music-progress-bar" className="music-progress-bar">
-              <div id="music-progress-current" className="music-progress-current"></div>
-            </div>
-            <div className="music-player-time">
-              <span id="music-current-time">0:00</span>
-              <span id="music-duration">0:00</span>
-            </div>
-          </div>
-          <div className="music-player-volume">
-            <button id="music-volume-btn"><i className="fas fa-volume-up"></i></button>
-            <input type="range" id="music-volume" min="0" max="1" step="0.1" defaultValue="0.5" />
-          </div>
-        </div>
-
-        <audio id="audio-player"></audio>
-
-        {/* Share Modal */}
-        <div className="share-modal" id="share-modal">
-          <div className="share-modal-content">
-            <button id="modal-close"><i className="fas fa-times"></i></button>
-            <h2>Share Portfolio</h2>
-            <input type="text" id="share-url" defaultValue={typeof window !== 'undefined' ? window.location.href : ''} readOnly />
-            <button id="copy-link-btn"><i className="fas fa-copy"></i> Copy Link</button>
-          </div>
-        </div>
       </main>
 
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; <span id="current-year">{new Date().getFullYear()}</span> Ansh Rajput. All rights reserved.</p>
+          <p>&copy; 2025 Ansh Rajput. All rights reserved.</p>
         </div>
       </footer>
 
-      <script src="https://tenor.com/embed.js" async></script>
+      <CursorScript />
+      <ThemeScript />
     </>
   )
 }
 
-function SkillCard({ color, icon, title, description }: any) {
+function LoadingScreen() {
   return (
-    <a href="#projects" className="skill-card" data-color={color}>
-      <div className="skill-card-header"></div>
-      <div className="skill-card-content">
-        <div className="skill-icon">
-          <i className={`fas ${icon}`}></i>
-        </div>
-        <h3 className="skill-title">{title}</h3>
-        <p className="skill-description">{description}</p>
-        <div className="skill-footer">
-          <i className="fas fa-arrow-right skill-arrow"></i>
-        </div>
-      </div>
-    </a>
-  )
-}
-
-function ProjectCard({ category, image, title, description, link }: any) {
-  return (
-    <div className="project-card" data-category={category}>
-      <div className="project-image">
-        <img src={image} alt={title} />
-        <div className="project-overlay">
-          <a href={link} className="project-link">View Project <i className="fas fa-arrow-up-right"></i></a>
-        </div>
-      </div>
-      <div className="project-content">
-        <span className="project-category">{category.charAt(0).toUpperCase() + category.slice(1)}</span>
-        <h3 className="project-title">{title}</h3>
-        <p className="project-description">{description}</p>
-        <a href={link} className="project-details">View Details <i className="fas fa-arrow-up-right"></i></a>
+    <div className="loading-screen" id="loading-screen">
+      <div className="loading-content">
+        <div className="loading-spinner"></div>
+        <h2>Welcome</h2>
+        <p>Loading your portfolio...</p>
       </div>
     </div>
   )
+}
+
+function SkillCard({ icon, title, description }: any) {
+  return (
+    <div className="skill-card">
+      <div className="skill-icon">
+        <i className={`fas ${icon}`}></i>
+      </div>
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  )
+}
+
+function ProjectCard({ title, description, category, image }: any) {
+  return (
+    <div className="project-card">
+      <div className="project-image">
+        <img src={image} alt={title} loading="lazy" />
+        <div className="project-overlay">
+          <span className="project-category">{category}</span>
+        </div>
+      </div>
+      <div className="project-content">
+        <h3>{title}</h3>
+        <p>{description}</p>
+        <a href="#" className="project-link">View Project →</a>
+      </div>
+    </div>
+  )
+}
+
+function CursorScript() {
+  useEffect(() => {
+    const cursorDot = document.getElementById('cursor-dot')
+    const cursorOutline = document.getElementById('cursor-outline')
+
+    if (!cursorDot || !cursorOutline) return
+
+    const updateCursor = (e: MouseEvent) => {
+      cursorDot.style.left = `${e.clientX}px`
+      cursorDot.style.top = `${e.clientY}px`
+      cursorOutline.style.left = `${e.clientX}px`
+      cursorOutline.style.top = `${e.clientY}px`
+    }
+
+    document.addEventListener('mousemove', updateCursor)
+
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select')
+    interactiveElements.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        cursorOutline.classList.add('active')
+      })
+      el.addEventListener('mouseleave', () => {
+        cursorOutline.classList.remove('active')
+      })
+    })
+
+    return () => {
+      document.removeEventListener('mousemove', updateCursor)
+    }
+  }, [])
+
+  return null
+}
+
+function ThemeScript() {
+  useEffect(() => {
+    const themeToggle = document.getElementById('theme-toggle')
+    const menuToggle = document.getElementById('menu-toggle')
+    const mobileMenu = document.getElementById('mobile-menu')
+
+    const getThemePreference = () => {
+      const saved = localStorage.getItem('theme')
+      if (saved) return saved
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+
+    const applyTheme = (theme: string) => {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else {
+        document.documentElement.removeAttribute('data-theme')
+      }
+      localStorage.setItem('theme', theme)
+    }
+
+    // Initialize theme
+    applyTheme(getThemePreference())
+
+    // Theme toggle
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const current = localStorage.getItem('theme') || 'light'
+        const next = current === 'dark' ? 'light' : 'dark'
+        applyTheme(next)
+      })
+    }
+
+    // Mobile menu toggle
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active')
+      })
+
+      const links = mobileMenu.querySelectorAll('a')
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active')
+        })
+      })
+    }
+
+    return () => {
+      if (themeToggle) themeToggle.removeEventListener('click', () => {})
+      if (menuToggle) menuToggle.removeEventListener('click', () => {})
+    }
+  }, [])
+
+  return null
 }
