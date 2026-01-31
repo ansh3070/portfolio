@@ -126,19 +126,41 @@ button {
   right: 0;
   z-index: 1000;
   transition: var(--transition);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
 }
 
 .header.transparent-header {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.2);
+}
+
+[data-theme='dark'] .header {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+}
+
+[data-theme='dark'] .header.transparent-header {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(51, 65, 85, 0.2);
 }
 
 .header.transparent-header .header-content {
   color: white;
 }
 
+.header.transparent-header .logo {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
 .header.transparent-header .nav-link {
   color: white;
   transition: var(--transition);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .header.transparent-header .nav-link:hover {
@@ -197,7 +219,14 @@ button {
 .theme-toggle {
   background: none;
   font-size: 1.25rem;
+  color: var(--text);
   transition: var(--transition);
+  cursor: pointer;
+}
+
+.header.transparent-header .theme-toggle {
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .theme-toggle:hover {
@@ -210,7 +239,17 @@ button {
   color: white;
   border-radius: 0.5rem;
   font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   transition: var(--transition);
+}
+
+.header.transparent-header .btn-admin {
+  background: rgba(236, 72, 153, 0.8);
+  backdrop-filter: blur(8px);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .btn-admin:hover {
@@ -222,6 +261,7 @@ button {
   display: none;
   background: none;
   font-size: 1.5rem;
+  color: var(--text);
 }
 
 /* ===== MOBILE MENU ===== */
